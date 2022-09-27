@@ -1,0 +1,81 @@
+/*Author :@ Pazhani Muthu
+Question : Print the table with the help of MYSQL & JDBC*/
+
+package com.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+public class Manager {
+	static {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+//CRUD - create,read,update,delete or drop 
+		public static void main(String[]args) 
+	throws ClassNotFoundException,
+	SQLException {
+		// TODO Auto-generated method stub
+		
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet RS = null;
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework1","root","");
+			 stmt = con.createStatement();
+			String query = "select * from data_for_client_master";
+			System.out.println(query);
+			RS = stmt.executeQuery(query);
+			while(RS.next())
+			{
+				System.out.println(RS.getString(1)+","+RS.getString(2)+","+RS.getString(3)+","+RS.getInt(4)+","+RS.getInt(5) );
+			}
+			query=   "delete from data_for_client_master where Client_No='Angular'";
+			int i = stmt.executeUpdate(query);
+			
+			System.out.println(i);
+			
+			
+			System.out.println(i > 0 ? "inserted":"not insert");
+			
+			 query = "select * from data_for_client_master";
+			 RS = stmt.executeQuery(query);//DQL  select
+			 while(RS.next())
+				{
+					System.out.println(RS.getString(1)+"\t"+RS.getString(2) );
+				}
+			System.out.println("Connected ...");
+			
+			query="CREATE  TABLE tab1(id int AUTO_INCREMENT PRIMARY key,d_name varchar(99))";
+			
+			boolean obj = stmt.execute(query);
+			System.out.println(obj);
+			
+		}
+		
+		
+		catch(SQLException ex)
+		{
+			ex.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			con.close();
+			stmt.close();
+			RS.close();
+		}
+		
+		System.out.println("Done");
+		}
+}
