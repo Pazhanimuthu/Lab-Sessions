@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+
+	<class name="com.bean.product">
+		<id name="id" column="pid">
+			<generator class="uuid"></generator>
+			
+			<!-- 
+			1.assigned
+			2.increment
+			3.hilo
+			4.native
+			5.sequence
+			6.indentity
+			7.uuid
+			8.foregin
+			
+			 -->
+		
+		</id>
+		
+		<property name="b_name"></property>
+		<property name="p_name"></property>
+		<property name="p_price"></property>
+		<property name="qty"></property>
+		
+	
+	</class>
+
+
+
+
+</hibernate-mapping>
